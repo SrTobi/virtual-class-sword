@@ -27,11 +27,24 @@ void test_baseneg()
 
 
 
+#include "baseEval.hpp"
+
+
+void test_baseeval()
+{
+	BaseEval b;
+
+	BaseEval::Expr* expr = b.new_Add(b.new_Const(4), b.new_Const(10));
+	std::cout << "baseEval[Expr::eval]= " << expr->eval() << std::endl;
+}
+
+
 
 int main()
 {
 	test_base();
 	test_baseneg();
+	test_baseeval();
 
 #ifdef WIN32
 	std::cin.get();
