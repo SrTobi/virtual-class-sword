@@ -8,3 +8,4 @@ Get and build it with
 	mkdir build
 	cd build
 	cmake ..
+	make
