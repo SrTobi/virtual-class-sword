@@ -19,7 +19,7 @@ struct BaseEval: public virtual Base
 		typedef typename _Out::Expr out_expr;
 		Const(int value	):Base::Const<_Out>(value){}
 
-		virtual int eval() const { return value; }
+		virtual int eval() const { return this->value; }
 	};
 	virtual Expr* new_Const(int value) const { return new Const<BaseEval>(value); }
 
@@ -29,7 +29,7 @@ struct BaseEval: public virtual Base
 		typedef typename _Out::Expr out_expr;
 		Add(out_expr* left, out_expr* right):Base::Add<_Out>(left, right) {}
 
-		virtual int eval() const { return left->eval() + right->eval(); }
+		virtual int eval() const { return this->left->eval() + this->right->eval(); }
 	};
 	virtual Expr* new_Add(Expr* left, Expr* right) const { return new Add<BaseEval>(left, right); }
 };

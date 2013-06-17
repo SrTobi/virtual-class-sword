@@ -18,7 +18,7 @@ struct BaseNegEval: public virtual BaseNeg, public virtual BaseEval
 		
 		Neg(out_expr* right): BaseNeg::Neg<_Out>(right) {}
 
-		virtual int eval() const { return -right->eval(); }
+		virtual int eval() const { return -this->right->eval(); }
 	};
 	virtual Expr* new_neg(Expr* right) const { return new Neg<BaseNegEval>(right); }
 };
