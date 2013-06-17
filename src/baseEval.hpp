@@ -14,18 +14,20 @@ struct BaseEval: public virtual Base
 	};
 
 	template<typename _Out>
-	struct Const: public virtual Expr, public virtual Base::Const<BaseEval>
+	struct Const: public virtual Expr, public virtual Base::Const<_Out>
 	{
-		Const(int value	):Base::Const<BaseEval>(value){}
+		typedef typename _Out::Expr out_expr;
+		Const(int value	):Base::Const<_Out>(value){}
 
 		virtual int eval() const { return value; }
 	};
 	virtual Expr* new_Const(int value) const { return new Const<BaseEval>(value); }
 
 	template<typename _Out>
-	struct Add: public virtual Expr, public virtual Base::Add<BaseEval>
+	struct Add: public virtual Expr, public virtual Base::Add<_Out>
 	{
-		Add(Expr* left, Expr* right):Base::Add<BaseEval>(left, right) {}
+		typedef typename _Out::Expr out_expr;
+		Add(out_expr* left, out_expr* right):Base::Add<_Out>(left, right) {}
 
 		virtual int eval() const { return left->eval() + right->eval(); }
 	};

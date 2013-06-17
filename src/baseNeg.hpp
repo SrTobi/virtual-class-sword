@@ -12,8 +12,9 @@ struct BaseNeg: public Base
 	template<typename _Out>
 	struct Neg: public virtual Expr
 	{
-		typename _Out::Expr* right;
-		Neg(Expr* right): right(right) {}
+		typedef typename _Out::Expr out_expr;
+		out_expr* right;
+		Neg(out_expr* right): right(right) {}
 
 		virtual std::string show() const { return "-" + right->show(); }
 	};
