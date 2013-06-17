@@ -13,7 +13,7 @@ struct Base
 		virtual std::string show() const = 0;
 	};
 
-	class Const: public Expr
+	class Const: public virtual Expr
 	{
 		int value;
 	public:
@@ -23,7 +23,7 @@ struct Base
 	};
 	virtual Const* new_Const(int value) const { return new Const(value); }
 
-	class Add: public Expr
+	class Add: public virtual Expr
 	{
 		Expr *left, *right;
 	public:
