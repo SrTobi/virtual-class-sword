@@ -7,31 +7,31 @@
 
 struct Base
 {
-	class Expr
+	struct Expr
 	{
-	public:
 		virtual std::string show() const = 0;
 	};
 
-	class Const: public virtual Expr
+	template<typename _Out>
+	struct Const: public virtual Expr
 	{
 		int value;
-	public:
 		Const(int value	):value(value){}
 
 		virtual std::string show() const { return std::to_string(value);}
 	};
-	virtual Const* new_Const(int value) const { return new Const(value); }
+	virtual Expr* new_Const(int value) const { return new Const<Base>(value); }
 
-	class Add: public virtual Expr
+	template<typename _Out>
+	struct Add: public virtual Expr
 	{
-		Expr *left, *right;
-	public:
-		Add(Expr* left, Expr* right):left(left),right(right) {}
+		typedef typename _Out::Expr out_expr;
+		out_expr *left, *right;
+		Add(out_expr* left, out_expr* right):left(left),right(right) {}
 
 		virtual std::string show() const { return "(" + left->show() + " + " + right->show() + ")"; }
 	};
-	virtual Add* new_Add(Expr* left, Expr* right) const { return new Add(left, right); }
+	virtual Expr* new_Add(Expr* left, Expr* right) const { return new Add<Base>(left, right); }
 };
 
 
