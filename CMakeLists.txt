@@ -8,7 +8,7 @@ project(virtual-class-sword)
 
 
 ################### setup options ###################
-set(Option_DEFAULT_MAKE_DOXYGEN_TARGET ON)
+set(Option_DEFAULT_MAKE_DOXYGEN_TARGET OFF)
 
 if(MSVC)
 set(Boost_USE_STATIC_LIBS ON)
